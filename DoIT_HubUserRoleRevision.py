@@ -17,17 +17,20 @@ def main():
     # IMPORTS
     from arcgis.gis import GIS
     import configparser
+    import os
 
     # VARIABLES
+    _root_project_path = os.path.dirname(__file__)
+
     # Credentials access and variable creation
-    credentials_file = r"Credentials\Credentials.cfg"
+    credentials_file = fr"{_root_project_path}\Credentials\Credentials.cfg"
     config_parser = configparser.ConfigParser()
     config_parser.read(credentials_file)
     md_hub_url = config_parser["DEFAULT"]["url"]
     md_hub_admin = config_parser["DEFAULT"]["login"]
     md_hub_pwd = config_parser["DEFAULT"]["password"]
 
-    #   esri keys for their roles in the Hub. Sometimes are intelligable strings and sometimes are not
+    #   esri keys for their roles in the Hub. Sometimes are intelligible strings and sometimes are not
     maryland_viewer_key = "EuJRbh4M3lBwBRI8"
     esri_viewer_key = "iAAAAAAAAAAAAAAA"
     esri_user_key = "org_user"
