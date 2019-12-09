@@ -7,7 +7,7 @@ This script can be used to batch update, periodically, the role of new users fro
 
 Author: CJuice
 Created: 20191119
-Revision:
+Revision: 20191209, CJuice, Needed functionality to check for Viewer roles and convert them to MarylandViewer role
 
 """
 
