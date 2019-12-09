@@ -51,8 +51,20 @@ def main():
     # print(users.search(role="org_publisher"))
     # print(users.search(role="EuJRbh4M3lBwBRI8"))  # MarylandViewer role key
 
-    # Manipulate the role of community accounts
-    viewer_role_users = users.search(role=esri_user_key)
+    # Manipulate the role of community accounts. The default is Role=User
+    user_role_users = users.search(role=esri_user_key)
+    print(user_role_users)
+    viewer_role_users = users.search(role=esri_viewer_key)
+    print(viewer_role_users)
+
+    # The default role is User (ESRI Role). Our MarylandViewer doesn't meet requirements to be populated as choice.
+    #   We need to convert User roles to MarylandViewer
+    for user in user_role_users:
+        print(f"Viewer: {user.fullName}, Role: {user.role}")
+        result = user.update_role(role=maryland_viewer_key)
+        print(f"\tModified: {result}")
+
+    # We do not want a Viewer role to exist so we also need to check and convert Viewer to MarylandViewer
     for viewer in viewer_role_users:
         print(f"Viewer: {viewer.fullName}, Role: {viewer.role}")
         result = viewer.update_role(role=maryland_viewer_key)
