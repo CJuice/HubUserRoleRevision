@@ -8,6 +8,7 @@ This script can be used to batch update, periodically, the role of new users fro
 Author: CJuice
 Created: 20191119
 Revision: 20191209, CJuice, Needed functionality to check for Viewer roles and convert them to MarylandViewer role
+20200211, CJuice, Added variable for newly created role called marylandpublisher. Unused at this time, just documenting.
 
 """
 
@@ -32,6 +33,7 @@ def main():
 
     #   esri keys for their roles in the Hub. Sometimes are intelligible strings and sometimes are not
     maryland_viewer_key = "EuJRbh4M3lBwBRI8"
+    # maryland_publisher_key = "OIe6FIO92rq2Onxc"
     esri_viewer_key = "iAAAAAAAAAAAAAAA"
     esri_user_key = "org_user"
 
