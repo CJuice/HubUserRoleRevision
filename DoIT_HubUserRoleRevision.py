@@ -9,6 +9,8 @@ Author: CJuice
 Created: 20191119
 Revision: 20191209, CJuice, Needed functionality to check for Viewer roles and convert them to MarylandViewer role
 20200211, CJuice, Added variable for newly created role called marylandpublisher. Unused at this time, just documenting.
+20200213, CJuice, Added a dict for the cryptic account role key to a meaningful english term. Added functionality
+    to edit dataframe values to meaningful terms before being printed so that the output is human readable/meaningful
 
 """
 
