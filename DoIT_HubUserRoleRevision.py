@@ -33,9 +33,12 @@ def main():
 
     #   esri keys for their roles in the Hub. Sometimes are intelligible strings and sometimes are not
     maryland_viewer_key = "EuJRbh4M3lBwBRI8"
-    # maryland_publisher_key = "OIe6FIO92rq2Onxc"
+    maryland_publisher_key = "OIe6FIO92rq2Onxc"
     esri_viewer_key = "iAAAAAAAAAAAAAAA"
     esri_user_key = "org_user"
+    esri_admin_key = "org_admin"
+    role_key_to_name_dict = {maryland_viewer_key: "Maryland Viewer", maryland_publisher_key: "Maryland Publisher",
+                             esri_viewer_key: "Esri Viewer", esri_user_key: "Esri User", esri_admin_key: "Admin"}
 
     # FUNCTIONALITY
     # Create a gis connection and get the users in the hub
@@ -45,6 +48,7 @@ def main():
     # Print out a dataframe of roles and the number of accounts/users at that role setting before manipulation
     print("\nBefore:")
     user_role_df = users.counts(type="role", as_df=True)
+    user_role_df["key"] = user_role_df["key"].apply(lambda x: role_key_to_name_dict.get(x, x))
     print(user_role_df)
 
     # Some search options saved for testing and insights
@@ -75,6 +79,7 @@ def main():
     # Print out a dataframe of roles and the number of accounts/users at that role setting after manipulation
     print("\nAfter:")
     user_role_df = users.counts(type="role", as_df=True)
+    user_role_df["key"] = user_role_df["key"].apply(lambda x: role_key_to_name_dict.get(x, "Unknown, Needs Attention"))
     print(user_role_df)
 
 
