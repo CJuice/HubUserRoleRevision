@@ -11,7 +11,8 @@ Revision: 20191209, CJuice, Needed functionality to check for Viewer roles and c
 20200211, CJuice, Added variable for newly created role called marylandpublisher. Unused at this time, just documenting.
 20200213, CJuice, Added a dict for the cryptic account role key to a meaningful english term. Added functionality
     to edit dataframe values to meaningful terms before being printed so that the output is human readable/meaningful
-
+20200302, CJuice, revised print statements in user and viewer loops. Was getting a UnicodeEncodeError on certain
+    accounts. Added some intentional encoding and try/except statements to see if that will solve the issue.
 """
 
 
@@ -68,13 +69,23 @@ def main():
     # The default role is User (ESRI Role). Our MarylandViewer doesn't meet requirements to be populated as choice.
     #   We need to convert User roles to MarylandViewer
     for user in user_role_users:
-        print(f"Viewer: {user.fullName}, Role: {user.role}")
+        try:
+            fullName_encoded = (user.fullName).encode(encoding="utf-8")
+            role_encoded = (user.role).encode(encoding="utf-8")
+            print(f"Viewer: {fullName_encoded}, Role: {role_encoded}")
+        except UnicodeEncodeError as uee:
+            print(f"UnicodeEncodeError: {uee}")
         result = user.update_role(role=maryland_viewer_key)
         print(f"\tModified: {result}")
 
     # We do not want a Viewer role to exist so we also need to check and convert Viewer to MarylandViewer
     for viewer in viewer_role_users:
-        print(f"Viewer: {viewer.fullName}, Role: {viewer.role}")
+        try:
+            fullName_encoded = (viewer.fullName).encode(encoding="utf-8")
+            role_encoded = (viewer.role).encode(encoding="utf-8")
+            print(f"Viewer: {fullName_encoded}, Role: {role_encoded}")
+        except UnicodeEncodeError as uee:
+            print(f"UnicodeEncodeError: {uee}")
         result = viewer.update_role(role=maryland_viewer_key)
         print(f"\tModified: {result}")
 
