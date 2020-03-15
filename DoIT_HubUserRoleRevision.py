@@ -13,6 +13,9 @@ Revision: 20191209, CJuice, Needed functionality to check for Viewer roles and c
     to edit dataframe values to meaningful terms before being printed so that the output is human readable/meaningful
 20200302, CJuice, revised print statements in user and viewer loops. Was getting a UnicodeEncodeError on certain
     accounts. Added some intentional encoding and try/except statements to see if that will solve the issue.
+20200315, CJuice, revised the search query for users to use the max_users parameter. The process was only getting
+    100 by default but we had more than that coming in. Now passing a variable with a high limit to capture all
+    users in the categories of interest.
 """
 
 
@@ -25,6 +28,7 @@ def main():
 
     # VARIABLES
     _root_project_path = os.path.dirname(__file__)
+    max_number_users = 10000
 
     # Credentials access and variable creation
     credentials_file = fr"{_root_project_path}\Credentials\Credentials.cfg"
@@ -54,16 +58,17 @@ def main():
     user_role_df["key"] = user_role_df["key"].apply(lambda x: role_key_to_name_dict.get(x, x))
     print(user_role_df)
 
-    # Some search options saved for testing and insights
-    # print(users.search(role="org_admin"))
-    # print(users.search(role="iAAAAAAAAAAAAAAA")) # Viewer role key
-    # print(users.search(role="org_publisher"))
-    # print(users.search(role="EuJRbh4M3lBwBRI8"))  # MarylandViewer role key
+    # Some search options saved for testing and insights. NOTE: .search() returns a max of 100 objects by default
+    # print(users.search(role="org_admin", max_users=max_number_users))
+    # print(users.search(role="iAAAAAAAAAAAAAAA", max_users=max_number_users)) # Viewer role key
+    # print(users.search(role="org_publisher", max_users=max_number_users))
+    # print(len(users.search(role="EuJRbh4M3lBwBRI8", max_users=max_number_users)))  # MarylandViewer role key
 
     # Manipulate the role of community accounts. The default is Role=User
-    user_role_users = users.search(role=esri_user_key)
+    # NOTE: .search() returns a max of 100 objects default.
+    user_role_users = users.search(role=esri_user_key, max_users=max_number_users)
     print(user_role_users)
-    viewer_role_users = users.search(role=esri_viewer_key)
+    viewer_role_users = users.search(role=esri_viewer_key, max_users=max_number_users)
     print(viewer_role_users)
 
     # The default role is User (ESRI Role). Our MarylandViewer doesn't meet requirements to be populated as choice.
