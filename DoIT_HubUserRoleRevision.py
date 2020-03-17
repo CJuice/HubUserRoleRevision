@@ -16,7 +16,7 @@ Revision: 20191209, CJuice, Needed functionality to check for Viewer roles and c
 20200315, CJuice, revised the search query for users to use the max_users parameter. The process was only getting
     100 by default but we had more than that coming in. Now passing a variable with a high limit to capture all
     users in the categories of interest.
-20200317, CJuice, revised the code to include the new SHAViewer role key and to affect the df printout 
+20200317, CJuice, revised the code to include the new SHAViewer role key and to affect the df printout
 """
 
 
