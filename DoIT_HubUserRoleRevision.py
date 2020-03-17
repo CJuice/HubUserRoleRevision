@@ -16,6 +16,7 @@ Revision: 20191209, CJuice, Needed functionality to check for Viewer roles and c
 20200315, CJuice, revised the search query for users to use the max_users parameter. The process was only getting
     100 by default but we had more than that coming in. Now passing a variable with a high limit to capture all
     users in the categories of interest.
+20200317, CJuice, revised the code to include the new SHAViewer role key and to affect the df printout 
 """
 
 
@@ -44,8 +45,10 @@ def main():
     esri_viewer_key = "iAAAAAAAAAAAAAAA"
     esri_user_key = "org_user"
     esri_admin_key = "org_admin"
+    sha_viewer_key = "Arb8zO845H7zLE1Z"
     role_key_to_name_dict = {maryland_viewer_key: "Maryland Viewer", maryland_publisher_key: "Maryland Publisher",
-                             esri_viewer_key: "Esri Viewer", esri_user_key: "Esri User", esri_admin_key: "Admin"}
+                             esri_viewer_key: "Esri Viewer", esri_user_key: "Esri User", esri_admin_key: "Admin",
+                             sha_viewer_key: "SHA Viewer"}
 
     # FUNCTIONALITY
     # Create a gis connection and get the users in the hub
